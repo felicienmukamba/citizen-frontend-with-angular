@@ -1,0 +1,69 @@
+<mat-card class="p-5 m-5">
+  <mat-card-title class="text-white my-3">Add New Person</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" placeholder="Enter first name">
+        <mat-error *ngIf="personForm.get('firstName')?.invalid">
+          {{ getErrorMessage('firstName') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" placeholder="Enter last name">
+        <mat-error *ngIf="personForm.get('lastName')?.invalid">
+          {{ getErrorMessage('lastName') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="emailAddress" placeholder="Enter email address">
+        <mat-error *ngIf="personForm.get('emailAddress')?.invalid">
+          {{ getErrorMessage('emailAddress') }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="tel" formControlName="phoneNumber" placeholder="Enter phone number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="MALE">Male</mat-option>
+          <mat-option value="FEMALE">Female</mat-option>
+          <mat-option value="NON_BINARY">Non-Binary</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Marital Status</mat-label>
+        <mat-select formControlName="maritalStatus">
+          <mat-option value="SINGLE">Single</mat-option>
+          <mat-option value="MARRIED">Married</mat-option>
+          <mat-option value="DIVORCED">Divorced</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="personForm.get('maritalStatus')?.value === 'MARRIED'">
+        <mat-label>Spouse Name</mat-label>
+        <input matInput formControlName="spouseName" placeholder="Enter spouse name">
+        <mat-error *ngIf="personForm.get('spouseName')?.invalid">
+          {{ getErrorMessage('spouseName') }}
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="personForm.invalid || isSubmitting">
+        Save
+      </button>
+
+      <div *ngIf="isSubmitting">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

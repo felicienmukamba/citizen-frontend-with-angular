@@ -1,0 +1,50 @@
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span style="flex: auto;" ></span>
+  <button mat-button >Home</button>
+  <button mat-button >Profile</button>
+  <button mat-button [matMenuTriggerFor]="menuRef">
+    <mat-icon iconPositionEnd>keyboard_arrow_down</mat-icon>
+    Import
+  </button>
+
+  <mat-menu #menuRef="matMenu">
+      <button mat-menu-item *ngFor="let item of items">
+          item
+      </button>
+  </mat-menu>
+  <button mat-raised-button color="accent">Logout</button>
+</mat-toolbar>
+
+<mat-drawer-container>
+<mat-drawer #sidenav opened="true" mode="side" position="start">
+  <mat-list>
+    <mat-list-item>
+      <button mat-button routerLink="/dashboard">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-button routerLink="/persons">
+        <mat-icon>persons</mat-icon>
+        Citoyens
+      </button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-button routerLink="/Mariage">
+        <mat-icon>favorite</mat-icon>
+        Mariage
+      </button>
+    </mat-list-item>
+  </mat-list>
+</mat-drawer>
+
+<mat-drawer-content>
+  <div style="min-height: 100vh; padding: 20px;">
+    <router-outlet />
+  </div>
+</mat-drawer-content>
+</mat-drawer-container>

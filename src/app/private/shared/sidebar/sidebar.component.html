@@ -1,0 +1,34 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-toolbar color="primary" class="toolbar">Menu</mat-toolbar>
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon>people</mat-icon>
+        <span>Person</span>
+      </mat-list-item>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Person</mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="'/person/add'">
+            <mat-icon>person_add</mat-icon>
+            Add Person
+          </a>
+          <a mat-list-item [routerLink]="'/person/list'">
+            <mat-icon>list</mat-icon>
+            List Persons
+          </a>
+        </mat-nav-list>
+      </mat-expansion-panel>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">Person Management</mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
