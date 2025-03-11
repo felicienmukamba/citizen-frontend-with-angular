@@ -159,4 +159,14 @@ export class PersonListComponent implements OnInit {
     });
   }
 
+viewPerson(person: Person): void {
+  if (person && person.nationalityID) {
+    console.log(`Navigating to View Person page for ${person.nationalityID}`);
+    this.router.navigate(['/persons', person.nationalityID]);
+    // Ensure parameter is correct
+  } else {
+    console.error('Person or nationalityID is missing!');
+  }
+}
+
 }

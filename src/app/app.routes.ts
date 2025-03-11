@@ -3,6 +3,7 @@ import { PersonListComponent } from './private/dashboard/person/person-list/pers
 import { AddPersonComponent } from './private/dashboard/person/add-person/add-person.component';
 import { EditPersonComponent } from './private/dashboard/person/edit-person/edit-person.component';
 import { DashboardComponent } from './private/dashboard/dashboard.component';
+import { PersonDetailComponent } from './private/dashboard/person/person-detail/person-detail.component';
 
 
 export const routes: Routes = [
@@ -10,6 +11,7 @@ export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent},
   { path: 'persons', component: PersonListComponent },
   { path: 'persons/add', component: AddPersonComponent },
+  { path: 'persons/:nationalityID', component: PersonDetailComponent },
   { path: 'persons/edit/:nationalityID', component: EditPersonComponent }
 
 ];

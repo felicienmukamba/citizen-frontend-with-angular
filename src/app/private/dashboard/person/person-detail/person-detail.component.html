@@ -1,1 +1,36 @@
-<p>person-detail works!</p>
+<mat-card class="mat-elevation-z4">
+  <mat-card-header>
+    <mat-card-title>Détails de {{ person.firstName }} {{ person.lastName }}</mat-card-title>
+    <mat-card-subtitle>Nationalité : {{ person.nationality }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p><strong>Nom de jeune fille :</strong> {{ person.maidenName }}</p>
+    <p><strong>Date de naissance :</strong> {{ person.birthDate | date }}</p>
+    <p><strong>Lieu de naissance :</strong> {{ person.birthPlace }}</p>
+    <p><strong>ID Nationalité :</strong> {{ person.nationalityID }}</p>
+    <p><strong>Genre :</strong> {{ person.gender }}</p>
+    <p><strong>Groupe ethnique :</strong> {{ person.ethnicGroup }}</p>
+    <p><strong>Numéro de certificat de naissance :</strong> {{ person.birthCertificateNumber }}</p>
+    <p><strong>Nom du père :</strong> {{ person.fathersName }}</p>
+    <p><strong>Nom de la mère :</strong> {{ person.mothersName }}</p>
+    <p><strong>Profession du père :</strong> {{ person.fathersProfession }}</p>
+    <p><strong>Profession de la mère :</strong> {{ person.mothersProfession }}</p>
+    <p><strong>Adresse actuelle :</strong> {{ person.currentAddress }}</p>
+    <p><strong>Email :</strong> {{ person.emailAddress }}</p>
+    <p><strong>Téléphone :</strong> {{ person.phoneNumber }}</p>
+    <p><strong>Contact d'urgence :</strong> {{ person.emergencyContactName }}</p>
+    <p><strong>Téléphone d'urgence :</strong> {{ person.emergencyContactPhone }}</p>
+    <p><strong>Groupe sanguin :</strong> {{ person.bloodType }}</p>
+    <p><strong>Allergies :</strong> {{ person.allergies }}</p>
+    <p><strong>Handicaps :</strong> {{ person.disabilities }}</p>
+    <p><strong>Niveau d'éducation :</strong> {{ person.educationLevel }}</p>
+    <p><strong>Profession :</strong> {{ person.profession }}</p>
+    <p><strong>Occupation :</strong> {{ person.occupation }}</p>
+    <p><strong>Religion :</strong> {{ person.religion }}</p>
+    <p><strong>Statut de votant :</strong> {{ person.voterStatus }}</p>
+    <p><strong>Numéro d'identification fiscale :</strong> {{ person.taxIdentificationNumber }}</p>
+    <p><strong>Numéro de sécurité sociale :</strong> {{ person.socialSecurityNumber }}</p>
+    <p><strong>Numéro de permis de conduire :</strong> {{ person.drivingLicenseNumber }}</p>
+    <p><strong>Numéro de passeport :</strong> {{ person.passportNumber }}</p>
+  </mat-card-content>
+</mat-card>

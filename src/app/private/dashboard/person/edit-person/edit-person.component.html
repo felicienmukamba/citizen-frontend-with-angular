@@ -1,61 +1,202 @@
-<mat-card class="p-5 m-5">
-  <mat-card-title class="text-white my-5" >Edit Person</mat-card-title>
+<mat-card>
+  <mat-card-title class="my-3">Edit Person</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName" placeholder="Enter first name">
-        <mat-error *ngIf="personForm.get('firstName')?.invalid">
-          {{ getErrorMessage('firstName') }}
-        </mat-error>
-      </mat-form-field>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <!-- Étape 1 : Détails personnels -->
+      <mat-step [stepControl]="personalDetailsForm" label="Personal Details">
+        <form [formGroup]="personalDetailsForm">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="Enter first name">
+            <mat-error *ngIf="personalDetailsForm.get('firstName')?.invalid">
+              First name is required
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName" placeholder="Enter last name">
-        <mat-error *ngIf="personForm.get('lastName')?.invalid">
-          {{ getErrorMessage('lastName') }}
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Enter last name">
+            <mat-error *ngIf="personalDetailsForm.get('lastName')?.invalid">
+              Last name is required
+            </mat-error>
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="emailAddress" placeholder="Enter email address">
-        <mat-error *ngIf="personForm.get('emailAddress')?.invalid">
-          {{ getErrorMessage('emailAddress') }}
-        </mat-error>
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Maiden Name</mat-label>
+            <input matInput formControlName="maidenName" placeholder="Enter maiden name">
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Phone Number</mat-label>
-        <input matInput type="tel" formControlName="phoneNumber" placeholder="Enter phone number">
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Birth Date</mat-label>
+            <input matInput type="date" formControlName="birthDate">
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Gender</mat-label>
-        <mat-select formControlName="gender">
-          <mat-option value="MALE">Male</mat-option>
-          <mat-option value="FEMALE">Female</mat-option>
-          <mat-option value="NON_BINARY">Non-Binary</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Birth Place</mat-label>
+            <input matInput formControlName="birthPlace" placeholder="Enter birth place">
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Marital Status</mat-label>
-        <mat-select formControlName="maritalStatus">
-          <mat-option value="SINGLE">Single</mat-option>
-          <mat-option value="MARRIED">Married</mat-option>
-          <mat-option value="DIVORCED">Divorced</mat-option>
-        </mat-select>
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Nationality ID</mat-label>
+            <input matInput formControlName="nationalityID" placeholder="Enter nationality ID">
+          </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="personForm.invalid || isSubmitting">
-        Update
-      </button>
+          <mat-form-field appearance="outline">
+            <mat-label>Nationality</mat-label>
+            <mat-select formControlName="nationality">
+              <mat-option *ngFor="let nationality of nationalities" [value]="nationality">
+                {{ nationality }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-      <div *ngIf="isSubmitting">
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-      </div>
-    </form>
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option *ngFor="let gender of genders" [value]="gender">
+                {{ gender }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Ethnic Group</mat-label>
+            <mat-select formControlName="ethnicGroup">
+              <mat-option [value]="null">None</mat-option>
+              <mat-option *ngFor="let group of ethnicGroups" [value]="group">
+                {{ group }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <button mat-button matStepperNext>Next</button>
+        </form>
+      </mat-step>
+
+      <!-- Étape 2 : Détails de contact -->
+      <mat-step [stepControl]="contactDetailsForm" label="Contact Details">
+        <form [formGroup]="contactDetailsForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phoneNumber" placeholder="Enter phone number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email Address</mat-label>
+            <input matInput type="email" formControlName="emailAddress" placeholder="Enter email address">
+            <mat-error *ngIf="contactDetailsForm.get('emailAddress')?.invalid">
+              A valid email is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Emergency Contact Name</mat-label>
+            <input matInput formControlName="emergencyContactName" placeholder="Enter emergency contact name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Emergency Contact Phone</mat-label>
+            <input matInput formControlName="emergencyContactPhone" placeholder="Enter emergency contact phone">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Current Address</mat-label>
+            <input matInput formControlName="currentAddress" placeholder="Enter current address">
+          </mat-form-field>
+
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </form>
+      </mat-step>
+
+      <!-- Étape 3 : Détails complémentaires -->
+      <mat-step [stepControl]="additionalDetailsForm" label="Additional Details">
+        <form [formGroup]="additionalDetailsForm">
+          <mat-form-field appearance="outline">
+            <mat-label>Marital Status</mat-label>
+            <mat-select formControlName="maritalStatus">
+              <mat-option *ngFor="let status of maritalStatuses" [value]="status">
+                {{ status }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Blood Type</mat-label>
+            <mat-select formControlName="bloodType">
+              <mat-option *ngFor="let bloodType of bloodTypes" [value]="bloodType">
+                {{ bloodType }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Allergies</mat-label>
+            <mat-select formControlName="allergies" multiple>
+              <mat-option *ngFor="let allergy of allergies" [value]="allergy">
+                {{ allergy }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Disabilities</mat-label>
+            <textarea matInput formControlName="disabilities" placeholder="Describe any disabilities"></textarea>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Education Level</mat-label>
+            <input matInput formControlName="educationLevel" placeholder="Enter education level">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Profession</mat-label>
+            <input matInput formControlName="profession" placeholder="Enter profession">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Occupation</mat-label>
+            <input matInput formControlName="occupation" placeholder="Enter occupation">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Religion</mat-label>
+            <input matInput formControlName="religion" placeholder="Enter religion">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Voter Status</mat-label>
+            <input matInput formControlName="voterStatus" placeholder="Enter voter status">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tax Identification Number</mat-label>
+            <input matInput formControlName="taxIdentificationNumber" placeholder="Enter tax identification number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Social Security Number</mat-label>
+            <input matInput formControlName="socialSecurityNumber" placeholder="Enter social security number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Driving License Number</mat-label>
+            <input matInput formControlName="drivingLicenseNumber" placeholder="Enter driving license number">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Passport Number</mat-label>
+            <input matInput formControlName="passportNumber" placeholder="Enter passport number">
+          </mat-form-field>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="additionalDetailsForm.invalid || isSubmitting">
+              Update
+            </button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
   </mat-card-content>
 </mat-card>
