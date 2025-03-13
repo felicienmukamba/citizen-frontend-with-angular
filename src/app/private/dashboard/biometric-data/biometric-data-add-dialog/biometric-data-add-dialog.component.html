@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Ajouter des Données Biométriques</h2>
+<mat-dialog-content>
+  <form [formGroup]="addForm">
+    <!-- Person Autocomplete -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Personne (NationalityID)</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Entrez NationalityID"
+        formControlName="personId"
+        [matAutocomplete]="auto"
+        (input)="onNationalityIDInput($event)"
+      />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayPerson">
+        <mat-option *ngIf="isLoading" disabled>
+          Chargement...
+        </mat-option>
+        <mat-option *ngFor="let person of filteredPersons" [value]="person">
+          {{ person.firstName }} {{ person.lastName }} ({{ person.nationalityID }})
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Facial Recognition Images -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Images Faciales (URI séparées par des virgules)</mat-label>
+      <input matInput formControlName="facialRecognitionImages" placeholder="Chemin des images">
+    </mat-form-field>
+
+    <!-- Fingerprints -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Empreintes Digitales (URI séparées par des virgules)</mat-label>
+      <input matInput formControlName="fingerprints" placeholder="Chemin des empreintes">
+    </mat-form-field>
+
+    <!-- Left Eye Scan -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Scan de l'Œil Gauche</mat-label>
+      <input matInput formControlName="leftEyeScan" placeholder="Chemin de l'œil gauche">
+    </mat-form-field>
+
+    <!-- Right Eye Scan -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Scan de l'Œil Droit</mat-label>
+      <input matInput formControlName="rightEyeScan" placeholder="Chemin de l'œil droit">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="onCancel()">Annuler</button>
+  <button mat-raised-button color="primary" [disabled]="addForm.invalid" (click)="onSubmit()">Ajouter</button>
+</mat-dialog-actions>

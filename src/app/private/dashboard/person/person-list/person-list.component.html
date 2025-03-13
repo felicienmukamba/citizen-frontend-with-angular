@@ -1,12 +1,12 @@
 <mat-card class="p-5 m-5 container">
-  <mat-card-title class="text-white">Person List with Filters</mat-card-title>
+  <mat-card-title class="container">Person List with Filters</mat-card-title>
 
   <form [formGroup]="filterForm" class=" filter-form flex justify-between">
 
     <div class="">
       <mat-form-field appearance="outline" class="">
         <mat-label>Search</mat-label>
-        <input matInput formControlName="search" placeholder="Search by name or email">
+        <input matInput formControlName="search" placeholder="Search by name, nationalityID or email">
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="">
@@ -29,7 +29,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button mat-raised-button color="accent" (click)="addPerson()">Add Person</button>
+    <button class="container" mat-raised-button color="accent" (click)="addPerson()">Add Person</button>
   </form>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">

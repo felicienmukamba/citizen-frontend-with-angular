@@ -1,0 +1,30 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      Liste des Données Biométriques
+      <button mat-raised-button color="primary" (click)="openAddDialog()" style="float: right;">
+        Ajouter
+      </button>
+    </mat-card-title>
+    <mat-divider></mat-divider>
+
+    <table mat-table [dataSource]="biometricDataList" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let data">{{ data.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let data">
+          <button mat-raised-button color="warn" (click)="deleteBiometricData(data.id)">Supprimer</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['id', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['id', 'actions'];"></tr>
+    </table>
+
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  </mat-card>
+</div>

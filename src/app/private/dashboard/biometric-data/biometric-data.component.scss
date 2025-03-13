@@ -1,0 +1,23 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+mat-card {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+mat-header-row, mat-row {
+  display: flex;
+  align-items: center;
+}
+
+mat-header-cell, mat-cell {
+  flex: 1;
+  padding: 10px;
+}
